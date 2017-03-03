@@ -1,0 +1,7 @@
+com\store\entity\Role.class
+com\store\entity\User.class
+com\store\config\AppConfig.class
+com\store\config\WebAppInitializer.class
+com\store\config\HibernateConfig.class
+com\store\entity\Product.class
+com\store\controller\ProductController.class
