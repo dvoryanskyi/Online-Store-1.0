@@ -12,4 +12,9 @@ public interface UserDAO {
 
     public User getById(Long id);
 
+    public void add(User user);
+
+    public void update(User user);
+
+    public void delete(Long id);
 }

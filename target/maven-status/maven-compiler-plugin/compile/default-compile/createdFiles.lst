@@ -1,5 +1,6 @@
 com\store\entity\Role.class
 com\store\entity\User.class
+com\store\controller\UserController.class
 com\store\config\AppConfig.class
 com\store\config\WebAppInitializer.class
 com\store\config\HibernateConfig.class

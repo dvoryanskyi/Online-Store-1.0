@@ -29,4 +29,19 @@ public class ProductDAOImpl implements ProductDAO{
     public void add(Product product) {
         sessionFactory.getCurrentSession().save(product);
     }
+
+    @Override
+    public void update(Product product) {
+        Product exProduct = sessionFactory.getCurrentSession().get(Product.class,product.getId());
+        exProduct.setName(product.getName());
+        exProduct.setDescription(product.getDescription());
+        exProduct.setPrice(product.getPrice());
+        sessionFactory.getCurrentSession().update(exProduct);
+    }
+
+    @Override
+    public void delete(Long id) {
+        Product product = sessionFactory.getCurrentSession().get(Product.class,id);
+        sessionFactory.getCurrentSession().delete(product);
+    }
 }

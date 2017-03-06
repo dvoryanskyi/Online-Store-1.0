@@ -17,3 +17,14 @@ app.controller('GreetingController', ['$scope','$http', function($scope,$http) {
 
 
 }]);
+
+
+var app = angular.module('kek3', []);
+app.controller('ShowProduct',function ($scope, $http, $location) {
+    $scope.product = {};
+    var url = $location.absUrl();
+    $http.get(url + '.json').then(function (response) {
+        $scope.product = response.data;
+        console.log($scope)
+    });
+});

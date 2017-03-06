@@ -19,13 +19,16 @@ public class Product {
 
     private String description;
 
+    private String imgURL;
+
     @Override
     public String toString() {
         return "Product{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", price='" + price + '\'' +
+                ", price=" + price +
                 ", description='" + description + '\'' +
+                ", imgURL='" + imgURL + '\'' +
                 '}';
     }
 
@@ -59,5 +62,13 @@ public class Product {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getImgURL() {
+        return imgURL;
+    }
+
+    public void setImgURL(String imgURL) {
+        this.imgURL = imgURL;
     }
 }

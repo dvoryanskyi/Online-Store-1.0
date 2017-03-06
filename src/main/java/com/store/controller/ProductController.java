@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 
@@ -39,5 +41,35 @@ public class ProductController {
         return "all-products";
     }
 
+    @RequestMapping(value = "/update",method = RequestMethod.POST)
+    public String update(@RequestBody Product product){
+        productService.update(product);
+        return "all-products";
+    }
+/*
+    @RequestMapping(value = "/update",method = RequestMethod.GET)
+    public @ResponseBody Product update(@RequestParam(value = "id")Long id,HttpServletResponse response) throws IOException {
+        response.sendRedirect("/update");
+        return productService.getById(id);
+    }
+*/
+    @RequestMapping(value = "/update/{id}",method = RequestMethod.GET)
+    public String editProduct(Product editedProduct){
+        return "update";
+    }
+
+
+    @RequestMapping(value = "/update/{id}.json")
+    public @ResponseBody  Product productJson(@PathVariable Long id){
+       return productService.getById(id);
+    }
+
+    @RequestMapping(value = "/product/{id}.json")
+    public @ResponseBody Product show(@PathVariable Long id){return productService.getById(id);}
+
+    @RequestMapping(value = "/product/{id}",method = RequestMethod.GET)
+    public String show(Product editedProduct){
+        return "product";
+    }
 
 }
