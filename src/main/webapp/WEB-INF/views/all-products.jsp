@@ -15,8 +15,13 @@
         </style>
     </head>
     <body ng-controller="GreetingController">
+    <jsp:include page="header.jsp"/>
+        <div style="margin-top: 45px">
+        <div>
 
-        <div class="container">
+         <jsp:include page="nav.jsp"/>
+        </div>
+            <div class="container" style="padding-top: 10px; padding-bottom: 100px">
                 <div ng-repeat="product in products"  >
                     <a ng-href="product/{{product.id}}" style="text-decoration: none;">
                         <div class="col-sm-3 col-sm-offset-1 thumbnail text-center" style="border-radius:50%;background-color:lightgrey;width:200px;height: 400px">
@@ -30,7 +35,7 @@
                         </div>
                     </a>
                 </div>
-
+        </div>
         </div>
 
 

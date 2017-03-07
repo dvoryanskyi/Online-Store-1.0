@@ -2,11 +2,18 @@ package com.store.dao.impl;
 
 import com.store.dao.ProductDAO;
 import com.store.entity.Product;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.hibernate.search.FullTextSession;
+import org.hibernate.search.Search;
+import org.hibernate.search.SearchFactory;
+import org.hibernate.search.jpa.FullTextEntityManager;
+import org.hibernate.search.query.dsl.QueryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 @Repository
 @Transactional
@@ -43,5 +50,15 @@ public class ProductDAOImpl implements ProductDAO{
     public void delete(Long id) {
         Product product = sessionFactory.getCurrentSession().get(Product.class,id);
         sessionFactory.getCurrentSession().delete(product);
+    }
+
+    @Override
+    public List<Product> find(String text) {
+        FullTextSession fullTextSession = Search.getFullTextSession(sessionFactory.getCurrentSession());
+        final QueryBuilder builder = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity(Product.class).get();
+        org.apache.lucene.search.Query luceneQuery = builder.keyword().onFields("name","description").matching(text).createQuery();
+        org.hibernate.Query fullTextQuery =  fullTextSession.createFullTextQuery(luceneQuery);
+        List<Product> result =  fullTextQuery.getResultList();
+        return result;
     }
 }

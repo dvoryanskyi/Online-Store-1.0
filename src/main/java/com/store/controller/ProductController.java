@@ -24,8 +24,6 @@ public class ProductController {
 
     @RequestMapping(value = "/find-all",method = RequestMethod.GET)
     public @ResponseBody List<Product> getAll(){
-
-        System.out.print(productService.getAll());
         return productService.getAll();
 
     }
@@ -72,4 +70,10 @@ public class ProductController {
         return "product";
     }
 
+    @RequestMapping(value = "/find-by-text")
+        public @ResponseBody List<Product> find(String text){
+            text = "Phone";
+            System.out.print(productService.find(text));
+            return productService.find(text);
+    }
 }

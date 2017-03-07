@@ -15,4 +15,6 @@ public interface ProductDAO {
     public void update(Product product);
 
     public void delete(Long id);
+
+    public List<Product> find(String text);
 }

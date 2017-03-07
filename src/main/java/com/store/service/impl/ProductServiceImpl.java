@@ -37,4 +37,9 @@ public class ProductServiceImpl implements ProductService{
     public void delete(Long id) {
         productDAO.delete(id);
     }
+
+    @Override
+    public List<Product> find(String text) {
+        return productDAO.find(text);
+    }
 }

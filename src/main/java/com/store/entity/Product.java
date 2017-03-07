@@ -1,11 +1,15 @@
 package com.store.entity;
 
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
+@Indexed
 public class Product {
 
 
@@ -13,10 +17,12 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Field
     private String name;
 
     private Double price;
 
+    @Field
     private String description;
 
     private String imgURL;

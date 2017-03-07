@@ -59,9 +59,10 @@ public class HibernateConfig {
         properties.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
         properties.put("hibernate.format_sql", env.getProperty("hibernate.format_sql"));
         properties.put("hibernate.enable_lazy_load_no_trans", env.getProperty("hibernate.enable_lazy_load_no_trans"));
+        properties.put("hibernate.search.default.directory_provider",env.getProperty("hibernate.search.default.directory_provider"));
+        //properties.put("cache.provider_class",env.getProperty("cache.provider_class"));
 
         return properties;
     }
-
 
 }
