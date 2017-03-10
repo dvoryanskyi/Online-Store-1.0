@@ -2,12 +2,18 @@ var app = angular.module('kek', []);
 
 app.controller("AddProduct", function ($scope, $http,$window) {
     $scope.product = {};
+    $scope.kkk = {};
+
+
+
 
     $scope.add = function (product, aForm) {
         if (aForm.$valid) {
+            $http.post('http://localhost:8080/product/img',document.getElementById('kkk').files[0]);
+            alert(aForm);
+            debugger;
             $http.post('http://localhost:8080/product/add', product);
             $window.location.href = '/product/all';
-            console.log($window);
         }
     };
 
@@ -32,6 +38,5 @@ app.controller("UpdateProduct", function ($scope, $http, $location,$window) {
             $window.location.href = '/product/all';
         }
     };
-
-
 });
+

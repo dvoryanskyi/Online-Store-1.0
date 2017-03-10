@@ -7,14 +7,14 @@ import javax.persistence.Id;
 import java.util.List;
 
 @Entity
-public class Order {
+public class UserOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Long  userId;
 
-    private List<Product> productList;
+    //private List<Product> productList;
 
 
 

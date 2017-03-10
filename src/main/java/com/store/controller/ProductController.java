@@ -5,9 +5,13 @@ import com.store.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
@@ -70,10 +74,32 @@ public class ProductController {
         return "product";
     }
 
-    @RequestMapping(value = "/find-by-text")
-        public @ResponseBody List<Product> find(String text){
-            text = "Phone";
-            System.out.print(productService.find(text));
-            return productService.find(text);
+    @RequestMapping(value = "/find-by-text",method = RequestMethod.POST)
+        public @ResponseBody List<Product> find(@RequestBody   String searchtext){
+
+        System.out.println(searchtext);
+            return productService.find(searchtext);
     }
+    @RequestMapping(value = "/uploadFile",method = RequestMethod.POST)
+    public @ResponseBody String uploadFileHendler(@RequestParam("name")String name, @RequestParam("file")MultipartFile file){
+            if(!file.isEmpty()){
+                try{
+                    byte[] bytes = file.getBytes();
+                    File dir = new File("src/main/webapp/resources/img");
+                    if(!dir.exists())
+                        dir.mkdir();
+                    File serverFile = new File(dir.getAbsolutePath()+File.separator+name);
+                    BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+                    stream.write(bytes);
+                    stream.close();
+                    return "success"+name;}
+                    catch (Exception e){
+                    return e.getMessage();
+                    }}
+            else{
+                return "faild empty";
+                }
+    }
+
+
 }

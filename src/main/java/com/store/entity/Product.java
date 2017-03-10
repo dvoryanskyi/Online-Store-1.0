@@ -1,7 +1,7 @@
 package com.store.entity;
 
-import org.hibernate.search.annotations.Field;
-import org.hibernate.search.annotations.Indexed;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.search.annotations.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +10,7 @@ import javax.persistence.Id;
 
 @Entity
 @Indexed
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Product {
 
 
@@ -17,12 +18,12 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Field
+    @Field(index = Index.YES, analyze= Analyze.YES, store= Store.NO)
     private String name;
 
     private Double price;
 
-    @Field
+    @Field(index=Index.YES, analyze=Analyze.YES, store=Store.NO)
     private String description;
 
     private String imgURL;
@@ -77,4 +78,6 @@ public class Product {
     public void setImgURL(String imgURL) {
         this.imgURL = imgURL;
     }
+
+
 }

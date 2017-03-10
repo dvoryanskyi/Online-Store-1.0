@@ -10,11 +10,16 @@
 <h2>Hello World!</h2>
 <div class="content">{{5+9}}</div>
 <div ng-controller="AddProduct" class="container">
-    <form name="aForm" >
+    <form name="aForm">
         <input type="text" ng-model="product.name" required>
         <input type="number" ng-model="product.price" required min="0">
         <input type="text" ng-model="product.description" required>
         <input type="submit" ng-click="add(product,aForm)" class="btn btn-success">
+    </form>
+    <form enctype="multipart/form-data" method="post" action="product/uploadFile">
+        <input type="file" name="file" required>
+        <input type="text" name="name">
+        <input type="submit" value="Upload">
     </form>
 </div>
 </body>

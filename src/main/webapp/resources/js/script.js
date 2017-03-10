@@ -13,7 +13,12 @@ app.controller('GreetingController', ['$scope','$http', function($scope,$http) {
     $scope.greeting = 'Hola!';
 
 
-
+    $scope.searchtext = '';
+    $scope.find = function (searchtext) {
+        $http.post('http://localhost:8080/product/find-by-text',searchtext).then(function (response) {
+            $scope.products = response.data;
+        });
+    };
 
 
 }]);

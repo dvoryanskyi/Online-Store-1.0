@@ -55,10 +55,16 @@ public class ProductDAOImpl implements ProductDAO{
     @Override
     public List<Product> find(String text) {
         FullTextSession fullTextSession = Search.getFullTextSession(sessionFactory.getCurrentSession());
+        try {
+            fullTextSession.createIndexer().startAndWait();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         final QueryBuilder builder = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity(Product.class).get();
         org.apache.lucene.search.Query luceneQuery = builder.keyword().onFields("name","description").matching(text).createQuery();
         org.hibernate.Query fullTextQuery =  fullTextSession.createFullTextQuery(luceneQuery);
         List<Product> result =  fullTextQuery.getResultList();
+        System.out.println(result);
         return result;
     }
 }
